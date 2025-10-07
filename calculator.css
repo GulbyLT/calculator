@@ -1,0 +1,43 @@
+body {
+    display:flex;
+    flex-direction: column;
+}
+
+#screen{
+    width: 400px;
+    height: 100px;
+    border: 2px solid black;
+    background-color: lightgrey;
+
+}
+
+#allButtons{
+    display:flex;
+    border: 2px solid black;
+    width: 400px;
+    height: 400px;
+}
+
+#numberButtons{
+    flex: 1;
+    width: 75%;
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.numberButton{
+    font-size: 30px;
+    margin: 2px;
+}
+
+#operationButtons{
+    width: 25%;
+    display:flex;
+    flex-direction: column;
+}
+
+.operationButton{
+    flex: 1;
+    font-size: 20px;
+    margin: 2px;
+}

@@ -39,3 +39,13 @@ function operate(a, b, op){
             break;
     }
 }
+
+let numberButton = document.getElementById("numberButtons");
+for(let i = 0; i < 10; i++){
+    let button = document.createElement("button");
+    button.textContent = i;
+    button.value = i;
+    button.classList.add("numberButton");
+    numberButton.appendChild(button);
+    button.style.width = "50px";
+}
