@@ -38,13 +38,7 @@ body {
     flex-direction: column;
 }
 
-.operationButton{
-    flex: 1;
-    font-size: 20px;
-    margin: 2px;
-}
-
-.equalsButton{
+.operationButton, .clearButton, .equalsButton, .decimalButton{
     flex: 1;
     font-size: 20px;
     margin: 2px;

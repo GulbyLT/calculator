@@ -123,3 +123,23 @@ equalsButton.addEventListener("click", () => {
 }
 );
 
+let decimalButton = document.querySelector(".decimalButton"); 
+if(resultProcessed){ //if result was just processed, reset everything when a number is pressed
+    screen.textContent = "";
+    currentInput = "";
+    storedNumber = "";
+    operator = "";
+    resultProcessed = false;
+}
+decimalButton.addEventListener("click", () => { //adds decimal point to current input if not already present
+    if(!currentInput.includes(".")){
+        if(currentInput === ""){ //if current input is empty, add leading 0 before decimal point
+            currentInput = "0.";
+            screen.textContent += currentInput; 
+        } else {
+        currentInput += ".";
+        screen.textContent += ".";  
+        }   
+    }
+    });
+
