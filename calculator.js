@@ -1,6 +1,7 @@
 let currentInput = ""; //actively input number
 let storedNumber = ""; //first number stored when operator is pressed
 result = null; //result of operation
+let resultProcessed = false; //flag to indicate if result has been processed
 
 
 function operate(a, b, op){ //performs operation based on operator
@@ -34,6 +35,13 @@ for(let i = 9; i >= 0 ; i--){
     button.classList.add("numberButton");
     numberButton.appendChild(button);
     button.addEventListener("click", () => {
+        if(resultProcessed){ //if result was just processed, reset everything when a number is pressed
+            screen.textContent = "";
+            currentInput = "";
+            storedNumber = "";
+            operator = "";
+            resultProcessed = false;
+        }
         screen.textContent += button.value;
         currentInput += button.value;
     });
@@ -102,6 +110,8 @@ equalsButton.addEventListener("click", () => {
         return;
     } else {
     console.log("result is " + result);
+    console.log(resultProcessed);
+    resultProcessed = true; //sets flag to indicate that result has been processed
     result = Math.round(result * 100) / 100; //rounds to 2 decimal places
     console.log("rounded result is " + result);
     screen.textContent = result;
