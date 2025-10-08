@@ -1,8 +1,8 @@
-let currentInput = "";
-let storedNumber = "";
+let currentInput = ""; //actively input number
+let storedNumber = ""; //first number stored when operator is pressed
 
 
-function operate(a, b, op){
+function operate(a, b, op){ //performs operation based on operator
     num1 = parseFloat(a);
     num2 = parseFloat(b);
     
@@ -15,7 +15,9 @@ function operate(a, b, op){
             return num1 * num2;
         case "/":
             if(num2 === 0){
+                screen.textContent = "Error: Div0";
                 return "Error: Division by zero";
+                screen.textContent = "Error: Div0";
             }
             return num1 / num2;
         default:
@@ -23,7 +25,7 @@ function operate(a, b, op){
     }
 }
 
-let numberButton = document.getElementById("numberButtons");
+let numberButton = document.getElementById("numberButtons"); //creates number buttons 0-9
 for(let i = 9; i >= 0 ; i--){
     let button = document.createElement("button");
     button.textContent = i;
@@ -40,7 +42,7 @@ for(let i = 9; i >= 0 ; i--){
 let screen = document.getElementById("screen");
 screen.textContent = "";
 
-let cButton = document.querySelector(".operationButton[value='C']");
+let cButton = document.querySelector(".operationButton[value='C']"); //clears screen, resets all variables
 cButton.addEventListener("click", () => {
     screen.textContent = "";
     currentInput = "";
@@ -51,7 +53,7 @@ cButton.addEventListener("click", () => {
 let operationButtons = document.querySelectorAll(".operationButton");
 operationButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        if(!storedNumber){
+        if(!storedNumber){ // if no first number is stored, allow using operators
         if(button.value === "+"){
             operator = "+";
             storedNumber = currentInput;
@@ -74,8 +76,8 @@ operationButtons.forEach((button) => {
             screen.textContent+= " / ";
         }
     } else {
-        let result = operate(storedNumber, currentInput, operator);
-        screen.textContent = result + " " + button.value + " ";
+        let result = operate(storedNumber, currentInput, operator); //if first number is stored, calculate result and allow chaining operations
+        screen.textContent = result + " " + button.value + " "; // mimics equals button press followed by operator press
         currentInput = "";
         storedNumber = result;
         operator = button.value;
@@ -85,18 +87,27 @@ operationButtons.forEach((button) => {
     });
 });
             
-let equalsButton = document.querySelector(".equalsButton");
+let equalsButton = document.querySelector(".equalsButton");  //calculates result when equals button is pressed
 equalsButton.addEventListener("click", () => {
     parseFloat(currentInput);
     parseFloat(storedNumber);
-    //console.log("current input is " + currentInput);
-    //console.log("stored number is " + storedNumber);
     console.log("operator is " + operator);
     let result = operate(storedNumber, currentInput, operator);
+    if(currentInput === "0" && operator === "/"){
+        screen.textContent = "Error: Div0"; //division by zero error handling
+        currentInput = "";
+        storedNumber = "";
+        operator = "";
+        return;
+    } else {
+    console.log("result is " + result);
+    result = Math.round(result * 100) / 100; //rounds to 2 decimal places
+    console.log("rounded result is " + result);
     screen.textContent = result;
     currentInput = result;
     storedNumber = "";
     operator = "";
+    };
 
 }
 );
