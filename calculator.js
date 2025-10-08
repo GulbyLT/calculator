@@ -1,5 +1,6 @@
 let currentInput = ""; //actively input number
 let storedNumber = ""; //first number stored when operator is pressed
+result = null; //result of operation
 
 
 function operate(a, b, op){ //performs operation based on operator
@@ -17,7 +18,6 @@ function operate(a, b, op){ //performs operation based on operator
             if(num2 === 0){
                 screen.textContent = "Error: Div0";
                 return "Error: Division by zero";
-                screen.textContent = "Error: Div0";
             }
             return num1 / num2;
         default:
@@ -26,6 +26,7 @@ function operate(a, b, op){ //performs operation based on operator
 }
 
 let numberButton = document.getElementById("numberButtons"); //creates number buttons 0-9
+
 for(let i = 9; i >= 0 ; i--){
     let button = document.createElement("button");
     button.textContent = i;
@@ -33,7 +34,6 @@ for(let i = 9; i >= 0 ; i--){
     button.classList.add("numberButton");
     numberButton.appendChild(button);
     button.addEventListener("click", () => {
-
         screen.textContent += button.value;
         currentInput += button.value;
     });
@@ -89,6 +89,7 @@ operationButtons.forEach((button) => {
             
 let equalsButton = document.querySelector(".equalsButton");  //calculates result when equals button is pressed
 equalsButton.addEventListener("click", () => {
+    if(!storedNumber || !currentInput || !operator) return; //if any of the required variables are missing, do nothing
     parseFloat(currentInput);
     parseFloat(storedNumber);
     console.log("operator is " + operator);
