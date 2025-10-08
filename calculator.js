@@ -1,42 +1,25 @@
-function add(a, b){
-    return a + b;
-}
+let currentInput = "";
+let storedNumber = "";
 
-function subtract(a, b){
-    return a - b;
-}
-
-function multiply(a, b){
-    return a * b;
-}
-
-function divide(a, b){
-    if(b === 0){
-        throw new Error("Cannot divide by zero");
-    }
-    return a / b;
-}
-
-let num1, num2;
-let operator;
 
 function operate(a, b, op){
     num1 = parseFloat(a);
     num2 = parseFloat(b);
     
     switch(op){
-        case '+':
-            add(num1, num2);
-            break;
-        case '-':
-            subtract(num1, num2);
-            break;
-        case '*':
-            multiply(num1, num2);
-            break;
-        case '/':
-            divide(num1, num2);
-            break;
+        case "+":
+            return num1 + num2;
+        case "-":
+            return num1 - num2;
+        case "*":
+            return num1 * num2;
+        case "/":
+            if(num2 === 0){
+                return "Error: Division by zero";
+            }
+            return num1 / num2;
+        default:
+            return "Error: Unknown operator";
     }
 }
 
@@ -47,4 +30,51 @@ for(let i = 9; i >= 0 ; i--){
     button.value = i;
     button.classList.add("numberButton");
     numberButton.appendChild(button);
+    button.addEventListener("click", () => {
+
+        screen.textContent += button.value;
+        currentInput += button.value;
+    });
 }
+
+let screen = document.getElementById("screen");
+screen.textContent = "8445";
+
+let cButton = document.querySelector(".operationButton[value='C']");
+cButton.addEventListener("click", () => {
+    screen.textContent = "";
+    currentInput = "";
+    storedNumber = "";
+    operator = "";
+});
+
+let operationButtons = document.querySelectorAll(".operationButton");
+operationButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        if(button.value === "+"){
+            operator = "+";
+            storedNumber = currentInput;
+            currentInput = "";
+            screen.textContent+= " + ";
+
+
+
+        }
+    });
+});
+            
+let equalsButton = document.querySelector(".operationButton[value='=']");
+equalsButton.addEventListener("click", () => {
+    parseFloat(currentInput);
+    parseFloat(storedNumber);
+    console.log("current input is " + currentInput);
+    console.log("stored number is " + storedNumber);
+    let result = operate(storedNumber, currentInput, operator);
+    screen.textContent = result;
+    currentInput = result;
+    storedNumber = "";
+    operator = "";
+
+}
+);
+
