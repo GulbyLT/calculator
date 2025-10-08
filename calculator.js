@@ -38,7 +38,7 @@ for(let i = 9; i >= 0 ; i--){
 }
 
 let screen = document.getElementById("screen");
-screen.textContent = "8445";
+screen.textContent = "";
 
 let cButton = document.querySelector(".operationButton[value='C']");
 cButton.addEventListener("click", () => {
@@ -56,9 +56,21 @@ operationButtons.forEach((button) => {
             storedNumber = currentInput;
             currentInput = "";
             screen.textContent+= " + ";
-
-
-
+        } else if(button.value === "-"){
+            operator = "-";
+            storedNumber = currentInput;
+            currentInput = "";
+            screen.textContent+= " - ";
+        } else if(button.value === "*"){
+            operator = "*";
+            storedNumber = currentInput;
+            currentInput = "";
+            screen.textContent+= " * ";
+        } else if(button.value === "/"){
+            operator = "/";
+            storedNumber = currentInput;
+            currentInput = "";
+            screen.textContent+= " / ";
         }
     });
 });
