@@ -51,6 +51,7 @@ cButton.addEventListener("click", () => {
 let operationButtons = document.querySelectorAll(".operationButton");
 operationButtons.forEach((button) => {
     button.addEventListener("click", () => {
+        if(!storedNumber){
         if(button.value === "+"){
             operator = "+";
             storedNumber = currentInput;
@@ -72,15 +73,25 @@ operationButtons.forEach((button) => {
             currentInput = "";
             screen.textContent+= " / ";
         }
+    } else {
+        let result = operate(storedNumber, currentInput, operator);
+        screen.textContent = result + " " + button.value + " ";
+        currentInput = "";
+        storedNumber = result;
+        operator = button.value;
+        screen.textContent = result + " " + button.value + " "; 
+    }
+
     });
 });
             
-let equalsButton = document.querySelector(".operationButton[value='=']");
+let equalsButton = document.querySelector(".equalsButton");
 equalsButton.addEventListener("click", () => {
     parseFloat(currentInput);
     parseFloat(storedNumber);
-    console.log("current input is " + currentInput);
-    console.log("stored number is " + storedNumber);
+    //console.log("current input is " + currentInput);
+    //console.log("stored number is " + storedNumber);
+    console.log("operator is " + operator);
     let result = operate(storedNumber, currentInput, operator);
     screen.textContent = result;
     currentInput = result;

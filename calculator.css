@@ -44,9 +44,16 @@ body {
     margin: 2px;
 }
 
+.equalsButton{
+    flex: 1;
+    font-size: 20px;
+    margin: 2px;
+}
+
 #screen {
     align-items: center;
     justify-content: flex-end;
     display: flex;
     font-size: 40px;
+
 }
